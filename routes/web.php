@@ -68,18 +68,14 @@ Route::post('/register', [RegisterController::class, 'store']);
 // })->middleware('auth');
 Route::get('/dashboard', function () {
     return view('admin.dashboard', [
-        'posting' => Postingan::all(),
+        'posting' => Post::all(),
         'category' => Category::all()
     ]);
 })->middleware('auth');
 
 Route::get('/post', function () {
-    $data = DB::table('posts')
-        ->join('categories', 'categories.id', '=', 'posts.id')
-        ->get();
     return view('admin.post.index', [
         'posts' => Post::all(),
-        'data' => $data
     ]);
 })->middleware('auth');
 Route::get('/tambah', function () {
